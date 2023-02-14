@@ -1,6 +1,7 @@
 library pkgmkb;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pkgmkb/reportedprogramspage/cubit/DashCubit.dart';
 import 'package:pkgmkb/reportedprogramspage/screens/Dashboard.dart';
 
@@ -11,12 +12,17 @@ class MyMannKiBaat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          DashCubit(token);
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Dashboard()));
-        },
-        child: Text("Open MannKiBaat"));
+    return BlocProvider(
+      create: (BuildContext context) {
+        return DashCubit(token);
+      },
+      child: TextButton(
+          onPressed: () {
+            DashCubit(token);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Dashboard()));
+          },
+          child: Text("Open MannKiBaat")),
+    );
   }
 }
